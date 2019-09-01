@@ -21,7 +21,7 @@
     ob-typescript
     evil-org
     ;; org-tree-slide
-    ;; ox-reveal
+    ox-reveal
     ;; worf
     ;; org-download
     ;; plain-org-wiki
@@ -315,8 +315,25 @@
       ;; the %i would copy the selected text into the template
       ;;http://www.howardism.org/Technical/Emacs/journaling-org.html
       ;;add multi-file journal
+
+      (defun org-hugo-new-subtree-post-capture-template ()
+        "Returns `org-capture' template string for new Hugo post.
+See `org-capture-templates' for more information."
+        (let* ((title (read-from-minibuffer "Post Title: ")) ;Prompt to enter the post title
+               (fname (org-hugo-slug title)))
+          (mapconcat #'identity
+                     `(
+                       ,(concat "* TODO " title)
+                       ":PROPERTIES:"
+                       ,(concat ":EXPORT_FILE_NAME: " fname)
+                       ":END:"
+                       "%?\n")          ;Place the cursor here finally
+                     "\n")))
+      
       (setq org-capture-templates
-            '(("t" "Todo" entry (file+headline org-agenda-file-gtd "Workspace")
+            '(("h" "Hugo post" entry (file+headline org-hugo-dir "blog") (function org-hugo-new-subtree-post-capture-template))
+              
+              ("t" "Todo" entry (file+headline org-agenda-file-gtd "Workspace")
                "* TODO [#B] %?\n  %i\n %U"
                :empty-lines 1)
               ("n" "notes" entry (file+headline org-agenda-file-note "Quick notes")
@@ -341,31 +358,6 @@
                entry (file+datetree org-agenda-file-journal)
                "* %?"
                :empty-lines 1)))
-
-      (with-eval-after-load 'org-capture
-        (defun org-hugo-new-subtree-post-capture-template ()
-          "Returns `org-capture' template string for new Hugo post.
-See `org-capture-templates' for more information."
-          (let* ((title (read-from-minibuffer "Post Title: ")) ;Prompt to enter the post title
-                 (fname (org-hugo-slug title)))
-            (mapconcat #'identity
-                       `(
-                         ,(concat "* TODO " title)
-                         ":PROPERTIES:"
-                         ,(concat ":EXPORT_FILE_NAME: " fname)
-                         ":END:"
-                         "\n\n")        ;Place the cursor here finally
-                       "\n")))
-
-        (add-to-list 'org-capture-templates
-                     '("h"              ;`org-capture' binding + h
-                       "Hugo post"
-                       entry
-                       ;; It is assumed that below file is present in `org-directory'
-                       ;; and that it has a "Blog Ideas" heading. It can even be a
-                       ;; symlink pointing to the actual location of all-posts.org!
-                       (file+headline org-agenda-file-blogposts "Blog Ideas")
-                       (function org-hugo-new-subtree-post-capture-template))))
 
       ;;An entry without a cookie is treated just like priority ' B '.
       ;;So when create new task, they are default 重要且紧急
@@ -527,8 +519,11 @@ holding contextual information."
     :defer t))
 
 (defun zilongshanren-org/post-init-ox-reveal ()
-  (setq org-reveal-root "file:///Users/guanghui/.emacs.d/reveal-js"))
-
+  ((use-package ox-reveal
+     :ensure t
+     (setq org-enable-github-support t)
+     (setq org-enable-reveal-js-support t)
+     (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"))))
 
 (defun zilongshanren-org/init-org-tree-slide ()
   (use-package org-tree-slide

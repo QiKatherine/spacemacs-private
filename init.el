@@ -38,7 +38,7 @@ This function should only modify configuration layer settings."
      (plantuml :variables plantuml-jar-path "~/.spacemacs.d/plantuml.jar")
      lsp
      dap
-     colors
+     (colors :variables colors-enable-nyan-cat-progress-bar t)
      prodigy
      ;; github
      search-engine
@@ -50,7 +50,7 @@ This function should only modify configuration layer settings."
      (spell-checking :variables spell-checking-enable-by-default nil)
      ;; (vinegar :variables vinegar-reuse-dired-buffer t)
      (spacemacs-layouts :variables layouts-enable-autosave nil
-                        layouts-autosave-delay 300)
+                        layouts-autosave-delay 300) 
      (git :variables
           git-magit-status-fullscreen t
           magit-push-always-verify nil
@@ -91,14 +91,14 @@ This function should only modify configuration layer settings."
      (typescript :variables
                  typescript-fmt-on-save nil
                  typescript-fmt-tool 'typescript-formatter
-                typescript-backend 'lsp)
+                 typescript-backend 'lsp)
      emacs-lisp
      (clojure :variables clojure-enable-fancify-symbols t)
      racket
-     (c-c++ :variables
-            c-c++-default-mode-for-headers 'c++-mode
-            c-c++-backend 'lsp-ccls
-            c-c++-lsp-executable (file-truename "/usr/local/bin/ccls"))
+     ;; (c-c++ :variables
+     ;;        c-c++-default-mode-for-headers 'c++-mode
+     ;;        c-c++-backend 'lsp-ccls
+     ;;        c-c++-lsp-executable (file-truename "/usr/local/bin/ccls"))
      zilongshanren
      (chinese :variables chinese-default-input-method 'pinyin
               chinese-enable-youdao-dict t)
@@ -110,7 +110,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor)
+   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor command-log-mode)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -120,7 +120,7 @@ This function should only modify configuration layer settings."
                     evil-indent-plus volatile-highlights smartparens
                     spaceline holy-mode skewer-mode rainbow-delimiters
                     highlight-indentation vi-tilde-fringe eyebrowse ws-butler
-                    org-bullets smooth-scrolling org-repo-todo org-download org-timer
+                    smooth-scrolling org-repo-todo org-download org-timer
                     livid-mode git-gutter git-gutter-fringe  evil-escape
                     leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
                     ac-ispell ace-jump-mode auto-complete auto-dictionary
@@ -240,8 +240,10 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-light
-                         solarized-dark)
+   dotspacemacs-themes '(	spacemacs-dark
+                            spacemacs-light
+                            solarized-light
+                            solarized-dark)
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
    ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
@@ -398,7 +400,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -631,7 +633,9 @@ dump."
                (setenv "PATH" (concat emax-mingw64 ";" (getenv "PATH")))
                ))
 
-           (add-hook 'projectile-mode-hook '(lambda () (remove-hook 'find-file-hook #'projectile-find-file-hook-function)))))
+           (add-hook 'projectile-mode-hook '(lambda () (remove-hook 'find-file-hook #'projectile-find-file-hook-function)))
+           (add-to-list 'load-path (expand-file-name "c:/Users/heqi2/AppData/Roaming/.emacs.d/elpa/27.0/develop/self -add-elisp-el-file"))
+           ))
 
   (setq exec-path (cons "/Users/lionqu/.nvm/versions/node/v10.16.0/bin/" exec-path))
   (setenv "PATH" (concat "/Users/lionqu/.nvm/versions/node/v10.16.0/bin:" (getenv "PATH")))

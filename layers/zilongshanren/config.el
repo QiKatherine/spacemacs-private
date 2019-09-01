@@ -9,13 +9,15 @@
 
 (if (spacemacs/system-is-mswindows)
     (setq
-     org-agenda-dir "f:/org-notes"
-     deft-dir "f:/org-notes"
-     blog-admin-dir "f:/zilongshanren.com")
+     org-agenda-dir "d:/Google drive local/Org file"
+	 org-hugo-dir "d:/Google drive local/Hugo/myblog/content-org/tech.org"
+     deft-dir "d:/Google drive local/Org file/notes"
+     blog-admin-dir "~/sheishe.xyz")
   (setq
-   org-agenda-dir "~/org-notes"
-   deft-dir "~/org-notes"
-   blog-admin-dir "~/zilongshanren.com"))
+   org-agenda-dir "~/Org file"
+   org-hugo-dir "~/Hugo/myblog/content-org/tech.org"
+   deft-dir "~/Org file/notes"
+   blog-admin-dir "~/sheishe.xyz"))
 
 
 ;;load sensitive data

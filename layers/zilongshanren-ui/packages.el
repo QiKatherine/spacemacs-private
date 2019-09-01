@@ -75,6 +75,8 @@
 
   (setq-default mode-line-format
                 (list
+                 '(:eval (list (nyan-create))) 
+                 
                  " %1"
                  '(:eval (zilongshanren/modeline-winum-mode))
                  " "
@@ -335,3 +337,26 @@ This segment overrides the modeline functionality of `org-mode-line-string'."
                             :weight 'normal)))
 
     (diminish 'whitespace-mode)))
+
+(setq command-log-packages
+      ;; bmag/command-log-mode is a fork of lewang/command-log-mode, and there
+      ;; is an open PR to merge the fork into the original repo.
+      ;; TODO when the PR is merged upstream, change to use the original package
+      ;; from MELPA (IOW remove :location argument)
+      '((command-log-mode :location (recipe :fetcher github
+                                            :repo "bmag/command-log-mode"
+                                            :branch "color"))))
+
+(defun command-log/init-command-log-mode ()
+  (use-package command-log-mode
+    :commands global-command-log-mode
+    ;; :commands (clm/open-command-log-buffer global-command-log-mode spacemacs/toggle-command-log-mode)
+    :init
+ fed    (spacemacs/set-leader-keys "aL" #'global-command-log-mode)
+    :config
+    (setq clm/log-command-exceptions* (append clm/log-command-exceptions*
+                                              '(evil-next-line
+                                                evil-previous-line
+                                                evil-forward-char
+                                                evil-backward-char))
+          command-log-mode-auto-show t)))
