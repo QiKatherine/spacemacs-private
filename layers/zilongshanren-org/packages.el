@@ -22,11 +22,20 @@
     evil-org
     ;; org-tree-slide
     ox-reveal
+    easy-hugo
     ;; worf
     ;; org-download
     ;; plain-org-wiki
-    )
-  )
+    ))
+
+(defun zilongshanren-org/init-easy-hugo ()
+  (use-package easy-hugo
+   :init
+   (setq easy-hugo-basedir "d:/Google drive local/Hugo/myblog")
+   (setq easy-hugo-postdir "content/post")
+   (setq easy-hugo-url "https://QiKatherine.github.io")
+   (setq easy-hugo-root "d:/Google drive local/Hugo/myblog")		
+   (setq easy-hugo-previewtime "20")))
 
 (defun zilongshanren-org/post-init-evil-org ()
   (defun evil-org--populate-navigation-bindings ()
@@ -519,11 +528,11 @@ holding contextual information."
     :defer t))
 
 (defun zilongshanren-org/post-init-ox-reveal ()
-  ((use-package ox-reveal
+  (use-package ox-reveal
      :ensure t
      (setq org-enable-github-support t)
      (setq org-enable-reveal-js-support t)
-     (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"))))
+     (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")))
 
 (defun zilongshanren-org/init-org-tree-slide ()
   (use-package org-tree-slide

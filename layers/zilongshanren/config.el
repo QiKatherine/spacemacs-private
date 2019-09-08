@@ -11,12 +11,12 @@
     (setq
      org-agenda-dir "d:/Google drive local/Org file"
 	 org-hugo-dir "d:/Google drive local/Hugo/myblog/content-org/tech.org"
-     deft-dir "d:/Google drive local/Org file/notes"
+     deft-dir "d:/Google drive local/Hugo/myblog/content-org/"
      blog-admin-dir "~/sheishe.xyz")
   (setq
    org-agenda-dir "~/Org file"
    org-hugo-dir "~/Hugo/myblog/content-org/tech.org"
-   deft-dir "~/Org file/notes"
+   deft-dir "~/Hugo/myblog/content-org/"
    blog-admin-dir "~/sheishe.xyz"))
 
 
