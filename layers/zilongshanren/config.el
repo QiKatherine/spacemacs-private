@@ -10,8 +10,8 @@
 (if (spacemacs/system-is-mswindows)
     (setq
      org-agenda-dir "d:/Google drive local/Org file"
-	 org-hugo-dir "d:/Google drive local/Hugo/myblog/content-org/tech.org"
-     deft-dir "d:/Google drive local/Hugo/myblog/content-org/"
+	 org-hugo-dir "d:/Hugo/myblog/content-org/tech.org"
+     deft-dir "d:/Hugo/myblog/content-org/"
      blog-admin-dir "~/sheishe.xyz")
   (setq
    org-agenda-dir "~/Org file"

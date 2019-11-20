@@ -110,7 +110,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor command-log-mode)
+   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor command-log-mode cdlatex)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -521,7 +521,9 @@ dump."
   )
 
 (defun dotspacemacs/user-config ()
-   
+  (require 'cdlatex)
+  (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)
+  
   ;;解决org表格里面中英文对齐的问题
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-mac) window-system)
@@ -529,7 +531,9 @@ dump."
 
   ;; Setting Chinese Font
   (when (and (spacemacs/system-is-mswindows) window-system)
+    (add-to-list 'exec-path "c:/msys64/usr/bin")
     (setq ispell-program-name "aspell")
+    (setq ispell-personal-dictionary "c:/msys64/mingw64/lib/aspell-0.60/en_GB")
     (setq w32-pass-alt-to-system nil)
     (setq w32-apps-modifier 'super)
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -566,7 +570,7 @@ dump."
     "Indent the current line as JavaScript."
     (interactive)
     (let* ((parse-status
-            (save-excursion (syntax-ppss (point-at-bol))))
+           (save-excursion (syntax-ppss (point-at-bol))))
            (offset (- (point) (save-excursion (back-to-indentation) (point)))))
       (if (nth 3 parse-status)
           'noindent
