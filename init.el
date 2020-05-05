@@ -30,7 +30,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(pdf
      (ivy :variables ivy-enable-advanced-buffer-information nil)
      better-defaults
      ranger
@@ -43,8 +43,8 @@ This function should only modify configuration layer settings."
      ;; github
      search-engine
      graphviz
-     (haskell :variables haskell-enable-hindent t
-              haskell-completion-backend 'intero)
+     ;; (haskell :variables haskell-enable-hindent t
+     ;;          haskell-completion-backend 'intero)
      (syntax-checking :variables syntax-checking-enable-by-default nil
                       syntax-checking-enable-tooltips nil)
      (spell-checking :variables spell-checking-enable-by-default nil)
@@ -77,7 +77,7 @@ This function should only modify configuration layer settings."
           org-enable-hugo-support t)
      gpu
      yaml
-     react
+     ;; react
      (python :variables
              python-test-runner '(nose pytest)
              python-backend 'lsp
@@ -85,15 +85,15 @@ This function should only modify configuration layer settings."
              python-lsp-git-root "~/Github/python-language-server")
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
-     lua
+     ;; lua
      html
-     (javascript :variables javascript-backend 'lsp)
+     ;; (javascript :variables javascript-backend 'lsp)
      (typescript :variables
                  typescript-fmt-on-save nil
                  typescript-fmt-tool 'typescript-formatter
                  typescript-backend 'lsp)
      emacs-lisp
-     (clojure :variables clojure-enable-fancify-symbols t)
+     ;; (clojure :variables clojure-enable-fancify-symbols t)
      racket
      ;; (c-c++ :variables
      ;;        c-c++-default-mode-for-headers 'c++-mode
@@ -110,7 +110,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor command-log-mode cdlatex)
+   dotspacemacs-additional-packages '(sicp ssh-agency anki-editor command-log-mode cdlatex org-edit-latex)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -496,9 +496,9 @@ dump."
 
 (defun dotspacemacs/user-init ()
   ;; (setq-default configuration-layer-elpa-archives
-  ;;               '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
-  ;;                 ("org-cn"   . "http://elpa.emacs-china.org/org/")
-  ;;                 ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
+  ;;               '(("org" . "http://orgmode.org/elpa/")
+  ;; 				("gnu" . "http://elpa.gnu.org/packages/") 
+  ;; 				("melpa" . "https://melpa.org/packages/")))
 
   
   (setq term-char-mode-point-at-process-mark nil)
@@ -570,7 +570,7 @@ dump."
     "Indent the current line as JavaScript."
     (interactive)
     (let* ((parse-status
-           (save-excursion (syntax-ppss (point-at-bol))))
+            (save-excursion (syntax-ppss (point-at-bol))))
            (offset (- (point) (save-excursion (back-to-indentation) (point)))))
       (if (nth 3 parse-status)
           'noindent
@@ -638,7 +638,7 @@ dump."
                ))
 
            (add-hook 'projectile-mode-hook '(lambda () (remove-hook 'find-file-hook #'projectile-find-file-hook-function)))
-           (add-to-list 'load-path (expand-file-name "c:/Users/heqi2/AppData/Roaming/.emacs.d/elpa/27.0/develop/self -add-elisp-el-file"))
+           (add-to-list 'load-path (expand-file-name "c:/Users/heqi2/AppData/Roaming/.emacs.d/elpa/26.3/develop/self-add-file"))
            ))
 
   (setq exec-path (cons "/Users/lionqu/.nvm/versions/node/v10.16.0/bin/" exec-path))
