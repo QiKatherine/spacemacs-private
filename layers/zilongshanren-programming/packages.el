@@ -21,17 +21,17 @@
         cmake-font-lock
         cmake-mode
         flycheck
-        (nodejs-repl-eval :location local)
+        ;; (nodejs-repl-eval :location local)
         (compile-dwim :location local)
-        js2-mode
-        js2-refactor
-        json-mode
+        ;; js2-mode
+        ;; js2-refactor
+        ;; json-mode
         racket-mode
         yasnippet
-        web-mode
-        js-doc
-        lua-mode
-        (cc-mode :location built-in)
+        ;; web-mode
+        ;; js-doc
+        ;; lua-mode
+        ;; (cc-mode :location built-in)
         ;; flycheck-clojure
         ;; etags-select
         (python :location built-in)
@@ -46,7 +46,7 @@
         robe
         exec-path-from-shell
         lsp-mode
-        typescript-mode
+        ;; typescript-mode
         ))
 
 (defun zilongshanren-programming/post-init-typescript-mode ()

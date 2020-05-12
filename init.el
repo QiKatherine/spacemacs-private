@@ -86,12 +86,12 @@ This function should only modify configuration layer settings."
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
      ;; lua
-     html
+     ;; html
      ;; (javascript :variables javascript-backend 'lsp)
-     (typescript :variables
-                 typescript-fmt-on-save nil
-                 typescript-fmt-tool 'typescript-formatter
-                 typescript-backend 'lsp)
+     ;; (typescript :variables
+     ;;             typescript-fmt-on-save nil
+     ;;             typescript-fmt-tool 'typescript-formatter
+     ;;             typescript-backend 'lsp)
      emacs-lisp
      ;; (clojure :variables clojure-enable-fancify-symbols t)
      racket
@@ -521,6 +521,7 @@ dump."
   )
 
 (defun dotspacemacs/user-config ()
+  (require 'emacs-grammarly)
   (require 'cdlatex)
   (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)
   
@@ -638,7 +639,7 @@ dump."
                ))
 
            (add-hook 'projectile-mode-hook '(lambda () (remove-hook 'find-file-hook #'projectile-find-file-hook-function)))
-           (add-to-list 'load-path (expand-file-name "c:/Users/heqi2/AppData/Roaming/.emacs.d/elpa/26.3/develop/self-add-file"))
+           (add-to-list 'load-path  "c:/Users/heqi2/AppData/Roaming/.emacs.d/elpa/27.0/develop")
            ))
 
   (setq exec-path (cons "/Users/lionqu/.nvm/versions/node/v10.16.0/bin/" exec-path))
