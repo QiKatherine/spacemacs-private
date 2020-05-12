@@ -960,7 +960,13 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (spacemacs|define-custom-layout "@work"
       :binding "w"
       :body
-      (find-file "~/Github/HlMJ_js/assets/scripts/Login/LoginScene.js"))))
+      (find-file "~/Github/HlMJ_js/assets/scripts/Login/LoginScene.ts")))
+  (when (fboundp 'spacemacs|define-custom-layout)
+    (spacemacs|define-custom-layout "@blog"
+      :binding "b"
+      :body
+      (find-file "~/zilongshanren.com/config.toml")))
+  )
 
 (defun zilongshanren-misc/post-init-pyim ()
   (progn
@@ -998,31 +1004,32 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
     (advice-add 'evil-insert :after 'display-current-input-method-title)
 
-    (when (functionp 'module-load)
-      (progn
-        (setq load-path (cons (file-truename "~/.spacemacs.d/") load-path))
-        (require 'liberime)
-        (require 'posframe)
+    (when (spacemacs/system-is-mac)
+      (when (functionp 'module-load)
+        (progn
+          (setq load-path (cons (file-truename "~/.spacemacs.d/") load-path))
+          (require 'liberime)
+          (require 'posframe)
 
-        (setq default-input-method "pyim")
-        (setq pyim-page-tooltip 'posframe)
-        (setq pyim-page-length 9)
+          (setq default-input-method "pyim")
+          (setq pyim-page-tooltip 'posframe)
+          (setq pyim-page-length 9)
 
-        (setq-default pyim-english-input-switch-functions
-                      '(pyim-probe-program-mode
-                        ;; pyim-probe-auto-english
-                        pyim-probe-org-structure-template))
+          (setq-default pyim-english-input-switch-functions
+                        '(pyim-probe-program-mode
+                          ;; pyim-probe-auto-english
+                          pyim-probe-org-structure-template))
 
 
-        ;; 不用频率切换输入法了。这个东西太好使了
-        (bind-key* "s-j" 'pyim-convert-code-at-point)
+          ;; 不用频率切换输入法了。这个东西太好使了
+          (bind-key* "s-j" 'pyim-convert-code-at-point)
 
-        (liberime-start "/Library/Input Methods/Squirrel.app/Contents/SharedSupport" (file-truename "~/Library/Rime"))
-        ;; 使用这个来查看当前输入法有哪些，不错
-        ;; (liberime-get-schema-list)
+          (liberime-start "/Library/Input Methods/Squirrel.app/Contents/SharedSupport" (file-truename "~/Library/Rime"))
+          ;; 使用这个来查看当前输入法有哪些，不错
+          ;; (liberime-get-schema-list)
 
-        (liberime-select-schema "wubi_pinyin")
-        (setq pyim-default-scheme 'rime)))))
+          (liberime-select-schema "wubi_pinyin")
+          (setq pyim-default-scheme 'rime))))))
 
 ;; deprecated
 (defun zilongshanren-misc/post-init-chinese-wbim ()
@@ -1063,22 +1070,13 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       ;; if the full path of current file is under SUBPROJECT1 or SUBPROJECT2
       ;; OR if I'm reading my personal issue track document,
       (defadvice find-file-in-project (before my-find-file-in-project activate compile)
-        (when (ffip-current-full-filename-match-pattern-p "\\(/fireball\\)")
+        (when (ffip-current-full-filename-match-pattern-p "\\(HLMJ_js\\)")
           ;; set the root directory into "~/projs/PROJECT_DIR"
-          (setq-local ffip-project-root "~/Github/fireball")
+          (setq-local ffip-project-root "~/Github/HLMJ_js")
           ;; well, I'm not interested in concatenated BIG js file or file in dist/
           (setq-local ffip-find-options "-not -size +64k -not -iwholename '*/bin/*'")
           ;; do NOT search files in below directories, the default value is better.
-          (dolist (item '("*/docs/html/*" "*.meta" "*/cocos2d-x/*" "*.asset" "*/visual-tests/res/*"))
-            (push item  ffip-prune-patterns)))
-        (when (ffip-current-full-filename-match-pattern-p "\\(/cocos2d-x\\)")
-          ;; set the root directory into "~/projs/PROJECT_DIR"
-          (setq-local ffip-project-root "~/cocos2d-x")
-          ;; well, I'm not interested in concatenated BIG js file or file in dist/
-          (setq-local ffip-find-options "-not -size +64k -not -iwholename '*/bin/*'")
-          ;; do NOT search files in below directories, the default value is better.
-          ;; (setq-default ffip-prune-patterns '(".git" ".hg" "*.svn" "node_modules" "bower_components" "obj"))
-          ))
+          (setq-default ffip-prune-patterns '(".git" ".hg" "*.svn" "node_modules" "bower_components" "temp"))))
       (ad-activate 'find-file-in-project))))
 
 

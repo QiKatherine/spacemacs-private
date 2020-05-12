@@ -73,6 +73,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((((class color) (min-colors 89)) (:foreground "#657b83" :background "#fdf6e3"))))
  '(ahs-definition-face ((t (:foreground "#d33682" :slant normal :weight bold))))
  '(ahs-face ((t (:foreground "#d33682" :weight bold))))
  '(command-log-command ((t (:foreground "dark magenta"))))
